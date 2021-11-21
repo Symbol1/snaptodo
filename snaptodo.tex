@@ -1,0 +1,135 @@
+
+\documentclass{article}
+
+\usepackage{snaptodo}
+
+\usepackage[pdfusetitle]{hyperref}
+
+\begin{document}
+
+\title{Snaptodo---Snap to the Correct Side Todo}
+
+\author{Hsin-Po Wang\footnote{A.Simple.People@gmail.com}}
+
+\maketitle
+
+\begin{abstract}
+	Snaptodo package is an alternative to the todonote package
+	that differs in the following ways:
+	(A) Depending on where you call \texttt{\string\todo}, the note
+		is put on the left or right margin, whichever is closer.
+	(B) The notes bump each other down so they never overlap;
+		the lines never overlap either; and they don't
+		trigger the \texttt{\string\marginpar} warning.
+	(C) Minimalistic, aesthetic, and customizable style.
+
+\end{abstract}
+
+\section{Minimal Working Example}
+
+	\begin{verbatim}
+		\documentclass{article}
+		\usepackage{snaptodo}
+		\begin{document}
+		    Your done
+		    \todo{Your todo}
+		\end{document}
+	\end{verbatim}
+
+\section{Examples Showcase}
+
+	Using snaptodo is as simple as calling
+	{\ttfamily\verb|\todo|}%
+	\todo{Calling \texttt{\string\todo}!}
+	and compile twice.%
+	\todo{Compile twice!}
+	If the calling point%
+	\todo{Calling point!}
+	is on the left of a page,%
+	\todo{Left of a page!}
+	the todo note, after compiling twice of course,
+	will appear to the left margin.%
+	\todo{On the left margin!}
+	And vice versa.%  
+	\todo{Vice versa!}
+
+\section{Customization}
+
+	I defined
+	{\ttfamily\verb|\snaptodoset|}
+	that works like
+	{\ttfamily\verb|\tikzset|} and
+	{\ttfamily\verb|\pgfplotsset|}.
+	While you can access some options by
+	{\ttfamily\verb|\snaptodoset{_some_option_}|},
+	you can also assess the exact same options by
+	{\ttfamily\verb|\pgfkeys{/snaptodo/_some_option_}|}.
+
+	The color of the broken line is
+	{\ttfamily\verb|snaptodo@chain|}.
+	The default color for that is
+	{\ttfamily\verb|red!50!black|}.
+	Using
+	{\ttfamily\verb|\colorlet{snaptodo@chain}{green!50!white}|}
+	lets you to change this color globally.
+	Instead, for locally changing this color, one may prefer using
+	{\ttfamily\verb|\todo[call chain/.append style=green!50!white]|}%
+	\todo[call chain/.append style=green!50!white]{New broken line color}.
+
+	The color of the note text is
+	{\ttfamily\verb|snaptodo@block|}.
+	The default color for that is
+	{\ttfamily\verb|yellow!50!black|}.
+	Using
+	{\ttfamily\verb|\colorlet{snaptodo@block}{blue!50!white}|}
+	lets you change this color.
+	Instead, for locally changing this color, one may prefer using
+	{\ttfamily\verb|\todo[margin block/.append style=blue!50!white]|}%
+	\todo[margin block/.append style=blue!50!white]{New note text color}.
+
+	The gap between two notes is stored in
+	{\ttfamily\verb|/snaptodo/block sep|}.
+	The default length for that is
+	{\ttfamily\verb|\baselineskip|}.
+	To change the behavior, you may use
+	{\ttfamily\verb|\snaptodoset{block sep=0pt}|}
+	for global and
+	{\ttfamily\verb|\todo[block sep=0pt]{}|}%
+	\todo[block sep=0pt]{2 blocks close.}
+	\todo[block sep=0pt]{..to each other}
+	for local setting.
+	
+	The gap between two lines is stored in
+	{\ttfamily\verb|/snaptodo/chain sep|}.
+	The default length for that is
+	{\ttfamily\verb|0.5ex|}.
+	To change, use
+	{\ttfamily\verb|\snaptodoset{chain sep=0pt}|}
+	for global and
+	{\ttfamily\verb|\todo[chain sep=0pt]{}|}%
+	\todo[chain sep=0pt]{2 chains close.}
+	\todo[chain sep=0pt]{..to each other}
+	for local setting.
+	
+	The alignment of the text in the note
+	can be controlled by the choices:
+	{\ttfamily\verb|far|},%
+	\todo[far]{far}
+	which is left on the left and right on the right,
+	{\ttfamily\verb|flush far|},%
+	\todo[flush far]{flush far}
+	which is flush left on the left and flush right on the right,
+	{\ttfamily\verb|near|},%
+	\todo[near]{near}
+	which is right on the left and left on the right,
+	{\ttfamily\verb|flush near|},%
+	\todo[near]{flush near}
+	which is flush right on the left and flush left on the right,
+	{\ttfamily\verb|center|},%
+	\todo[center]{center}
+	which is center on both sides.
+	{\ttfamily\verb|flush center|},%
+	\todo[flush center]{flush center}
+	which is flush center on both sides.
+
+\end{document}

@@ -1,0 +1,160 @@
+
+% # Snap To Do
+%
+% Hsin-Po Wang
+% A.Simple.People@gmail.com 
+%
+% This is snaptodo.sty,
+% an alternative to todonote.sty
+% that differs in the following ways
+%
+% * Depending on where you call `\todo`,
+%   the note is on the left or right margin,
+%   whichever is closer.
+% * The notes bump each other
+%   so they never overlap.
+% * Aesthetic and customizable style.
+
+
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+
+\ProvidesPackage{snaptodo}[2021/11/22]
+
+\RequirePackage{tikzpagenodes}
+
+\def\todo{%
+	\snaptodo@initialize
+	\global\let\todo\snaptodo@main
+	\todo
+}
+
+\def\snaptodo@initialize{%
+	\tikz[overlay]
+		\node(snaptodo@margin@left){}
+		node(snaptodo@margin@right){}
+		coordinate(snaptodo@inline@left){}
+		coordinate(snaptodo@inline@right){}
+		coordinate(snaptodo@drop@left){}
+		coordinate(snaptodo@drop@right){}
+	;%
+}
+
+\def\snaptodo@main{%
+	\pgfutil@ifnextchar[%]
+	{\snaptodo@main@opt}{\snaptodo@main@opt[]}%
+}
+
+\def\snaptodo@main@opt[#1]#2{%
+	\tikz[remember picture,overlay]{
+		\snaptodoset{#1}
+		\snaptodo@remember@side
+		\snaptodo@typeset@margin@block{#2}
+		\snaptodo@dipict@call@chain
+	}%
+}
+
+\def\snaptodo@remember@side{
+	\pgfpointanchor{current page}{center}
+	\ifdim\pgf@x>0pt
+		\def\std@westeast{west}
+		\def\std@eastwest{east}
+		\def\std@leftright{left}
+		\def\std@rightleft{right}
+		\def\std@plusminus{+}
+	\else
+		\def\std@westeast{east}
+		\def\std@eastwest{west}
+		\def\std@leftright{right}
+		\def\std@rightleft{left}
+		\def\std@plusminus{-}
+	\fi
+}
+
+\def\snaptodo@typeset@margin@block#1{
+	\pgfpointanchor{current page text area}\std@westeast
+	\xdef\std@inline@xpt{\the\pgf@x}
+	\node(snaptodo@margin@\std@leftright)[
+		/snaptodo/margin block,
+		/utils/exec={
+			\let\tikz@transform=\snaptodo@margin@block@transform
+		}
+	]{#1};
+}
+
+\def\snaptodo@margin@block@transform{
+	\pgftransformshift{\pgfpoint{\std@inline@xpt}0}
+	\pgftransformshift{\pgfpoint{-\std@plusminus\marginparsep}0}
+	\pgfpointanchor{snaptodo@inline@\std@leftright}{center}
+	\ifdim\pgf@y<0pt\else
+		\pgfpointanchor{snaptodo@margin@\std@leftright}{south}
+		\pgftransformshift{\pgfpoint0{min(
+			\pgf@y
+			-\ht\pgfnodeparttextbox
+			-\dp\pgfnodeparttextbox
+			-2*\pgfkeysvalueof{/pgf/inner ysep}
+			-\std@blocksep
+		,0)}}
+	\fi
+}
+
+\def\snaptodo@dipict@call@chain{
+	\pgfpointanchor{snaptodo@inline@\std@leftright}{center}
+	\ifdim\pgf@y<0pt
+		\def\std@inline@y{0}
+	\else
+		\pgfpointanchor{snaptodo@drop@\std@leftright}{center}
+		\pgfmathsetmacro\std@inline@y{min(\pgf@y-\std@chainsep,0)}
+	\fi
+	\snaptodo@dipict@call@chain@drawer
+}
+
+\def\snaptodo@dipict@call@chain@drawer{
+	\draw[/snaptodo/call chain]
+		(0,\std@chainsep)--
+		(0,0)coordinate(snaptodo@inline@\std@leftright){}--
+		(0,\std@inline@y pt)coordinate(snaptodo@drop@\std@leftright){}--
+		(\std@inline@xpt,\std@inline@y pt)--
+		(snaptodo@margin@\std@leftright.south \std@eastwest)--
+		(snaptodo@margin@\std@leftright.south \std@westeast)
+	;
+}
+
+\colorlet{snaptodo@chain}{yellow!50!black}
+\colorlet{snaptodo@block}{red!50!black}
+
+\def\snaptodoset{\pgfqkeys{/snaptodo}}
+
+\snaptodoset{
+	.unknown/.code={%
+		\let\snaptodo@key\pgfkeyscurrentname%
+		\pgfkeys{/pgf/\snaptodo@key/.try={#1}}%
+	},
+	block sep/.store in=\std@blocksep,
+	block sep=\baselineskip,
+	block align/.store in=\std@blockalign,
+	far/.code={\def\std@blockalign{\std@leftright}},
+	flush far/.code={\def\std@blockalign{flush \std@leftright}},
+	near/.code={\def\std@blockalign{\std@rightleft}},
+	flush near/.code={\def\std@blockalign{flush \std@rightleft}},
+	center/.code={\def\std@blockalign{center}},
+	flush center/.code={\def\std@blockalign{flush center}},
+	justify/.code={\def\std@blockalign{justify}},
+	flush far,
+	block font/.store in=\std@blockfont,
+	block font=\small,
+	margin block/.style={
+		above \std@leftright,
+		text width={\marginparwidth-2*\pgfkeysvalueof{/pgf/inner xsep}},
+		align=\std@blockalign,
+		font=\std@blockfont,
+		text=snaptodo@block,
+	},
+	chain sep/.store in=\std@chainsep,
+	chain sep=0.5ex,
+	call chain/.style={
+		draw=snaptodo@chain,
+		blend mode=darken,
+	}
+}
+
+\endinput
