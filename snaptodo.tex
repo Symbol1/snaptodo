@@ -36,7 +36,7 @@
 		\end{document}
 	\end{verbatim}
 
-\section{Examples Showcase}
+\section{Showcase of Examples}
 
 	Using snaptodo is as simple as calling
 	{\ttfamily\verb|\todo|}%
@@ -65,6 +65,8 @@
 	you can also assess the exact same options by
 	{\ttfamily\verb|\pgfkeys{/snaptodo/_some_option_}|}.
 
+\subsection{Colors}
+
 	The color of the broken line is
 	{\ttfamily\verb|snaptodo@chain|}.
 	The default color for that is
@@ -87,30 +89,40 @@
 	{\ttfamily\verb|\todo[margin block/.append style=blue!50!white]|}%
 	\todo[margin block/.append style=blue!50!white]{New note text color}.
 
+\subsection{Lengths}
+
 	The gap between two notes is stored in
 	{\ttfamily\verb|/snaptodo/block sep|}.
-	The default length for that is
+	The default length is
 	{\ttfamily\verb|\baselineskip|}.
-	To change the behavior, you may use
+	To change, use
 	{\ttfamily\verb|\snaptodoset{block sep=0pt}|}
-	for global and
-	{\ttfamily\verb|\todo[block sep=0pt]{}|}%
+	for global setting and
+	{\ttfamily\verb|\todo[block sep=0pt]{note}|}%
 	\todo[block sep=0pt]{2 blocks close.}
 	\todo[block sep=0pt]{..to each other}
 	for local setting.
 	
 	The gap between two lines is stored in
 	{\ttfamily\verb|/snaptodo/chain sep|}.
-	The default length for that is
+	The default length is
 	{\ttfamily\verb|0.5ex|}.
 	To change, use
 	{\ttfamily\verb|\snaptodoset{chain sep=0pt}|}
-	for global and
-	{\ttfamily\verb|\todo[chain sep=0pt]{}|}%
+	for global setting and
+	{\ttfamily\verb|\todo[chain sep=0pt]{note}|}%
 	\todo[chain sep=0pt]{2 chains close.}
 	\todo[chain sep=0pt]{..to each other}
 	for local setting.
-	
+
+	The width of the note is
+	{\ttfamily\verb|\marginparwidth|}.
+	The width where the line has slope is
+	{\ttfamily\verb|\marginparsep|}.
+	These are the built-in dimensions.
+
+\subsection{Alignment and sizes}
+
 	The alignment of the text in the note
 	can be controlled by the choices:
 	{\ttfamily\verb|far|},%
@@ -131,5 +143,20 @@
 	{\ttfamily\verb|flush center|},%
 	\todo[flush center]{flush center}
 	which is flush center on both sides.
+	
+	Font size is controlled by
+	\todo[font=\tiny]{tiny}
+	\todo[font=\Large]{Large}
+	\todo[font=\Huge]{Huge}
+	{\ttfamily\verb|/snaptodo/block font|}.
+
+%%% \marginparsep
+
+%%% \marginparwidth
+
+%%% customize color
+
+%%% `block font`' or `font`?
+
 
 \end{document}
