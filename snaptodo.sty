@@ -32,10 +32,10 @@
 	\tikz[overlay]
 		\node(snaptodo@margin@left){}
 		node(snaptodo@margin@right){}
-		coordinate(snaptodo@inline@left){}
-		coordinate(snaptodo@inline@right){}
-		coordinate(snaptodo@drop@left){}
-		coordinate(snaptodo@drop@right){}
+		coordinate(snaptodo@baseline@left){}
+		coordinate(snaptodo@baseline@right){}
+		coordinate(snaptodo@descent@left){}
+		coordinate(snaptodo@descent@right){}
 	;%
 }
 
@@ -72,9 +72,10 @@
 
 \def\snaptodo@typeset@margin@block#1{
 	\pgfpointanchor{current page text area}\std@westeast
-	\xdef\std@inline@xpt{\the\pgf@x}
+	\xdef\std@descent@xpt{\the\pgf@x}
 	\node(snaptodo@margin@\std@leftright)[
-		/snaptodo/margin block,
+		/snaptodo/margin@block,
+		/snaptodo/margin block/.try,
 		/utils/exec={
 			\let\tikz@transform=\snaptodo@margin@block@transform
 		}
@@ -82,9 +83,9 @@
 }
 
 \def\snaptodo@margin@block@transform{
-	\pgftransformshift{\pgfpoint{\std@inline@xpt}0}
+	\pgftransformshift{\pgfpoint{\std@descent@xpt}0}
 	\pgftransformshift{\pgfpoint{-\std@plusminus\marginparsep}0}
-	\pgfpointanchor{snaptodo@inline@\std@leftright}{center}
+	\pgfpointanchor{snaptodo@baseline@\std@leftright}{center}
 	\ifdim\pgf@y<0pt\else
 		\pgfpointanchor{snaptodo@margin@\std@leftright}{south}
 		\pgftransformshift{\pgfpoint0{min(
@@ -98,22 +99,22 @@
 }
 
 \def\snaptodo@dipict@call@chain{
-	\pgfpointanchor{snaptodo@inline@\std@leftright}{center}
+	\pgfpointanchor{snaptodo@baseline@\std@leftright}{center}
 	\ifdim\pgf@y<0pt
-		\def\std@inline@y{0}
+		\def\std@descent@y{0}
 	\else
-		\pgfpointanchor{snaptodo@drop@\std@leftright}{center}
-		\pgfmathsetmacro\std@inline@y{min(\pgf@y-\std@chainsep,0)}
+		\pgfpointanchor{snaptodo@descent@\std@leftright}{center}
+		\pgfmathsetmacro\std@descent@y{min(\pgf@y-\std@chainsep,0)}
 	\fi
 	\snaptodo@dipict@call@chain@drawer
 }
 
 \def\snaptodo@dipict@call@chain@drawer{
-	\draw[/snaptodo/call chain]
+	\draw[/snaptodo/call@chain,/snaptodo/call chain/.try]
 		(0,\std@chainsep)--
-		(0,0)coordinate(snaptodo@inline@\std@leftright){}--
-		(0,\std@inline@y pt)coordinate(snaptodo@drop@\std@leftright){}--
-		(\std@inline@xpt,\std@inline@y pt)--
+		(0,0)coordinate(snaptodo@baseline@\std@leftright){}--
+		(0,\std@descent@y pt)coordinate(snaptodo@descent@\std@leftright){}--
+		(\std@descent@xpt,\std@descent@y pt)--
 		(snaptodo@margin@\std@leftright.south \std@eastwest)--
 		(snaptodo@margin@\std@leftright.south \std@westeast)
 	;
@@ -131,29 +132,15 @@
 	},
 	block sep/.store in=\std@blocksep,
 	block sep=\baselineskip,
-	block align/.store in=\std@blockalign,
-	align/.forward to=/snaptodo/block align,
-	far/.style={align=\std@leftright},
-	flush far/.style={align=flush \std@leftright},
-	near/.style={align=\std@rightleft},
-	flush near/.style={align=flush \std@rightleft},
-	center/.style={align=center},
-	flush center/.style={align=flush center},
-	justify/.style={align=justify},
-	flush far,
-	block font/.store in=\std@blockfont,
-	block font=\small,
-	font/.forward to=/snaptodo/block font,
-	margin block/.style={
+	margin@block/.style={
 		above \std@leftright,
 		text width={\marginparwidth-2*\pgfkeysvalueof{/pgf/inner xsep}},
-		align=\std@blockalign,
-		font=\std@blockfont,
+		align=flush \std@leftright,
 		text=snaptodo@block,
 	},
 	chain sep/.store in=\std@chainsep,
 	chain sep=0.5ex,
-	call chain/.style={
+	call@chain/.style={
 		draw=snaptodo@chain,
 		blend mode=darken,
 	}

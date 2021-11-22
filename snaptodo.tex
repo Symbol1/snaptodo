@@ -7,7 +7,7 @@
 
 \begin{document}
 
-\title{Snaptodo---Snap to the Correct Side Todo}
+\title{Snaptodo---A Snap-to-the-Correct-Side Todo}
 
 \author{Hsin-Po Wang\footnote{A.Simple.People@gmail.com}}
 
@@ -74,9 +74,9 @@
 	Using
 	{\ttfamily\verb|\colorlet{snaptodo@chain}{green!50!white}|}
 	lets you to change this color globally.
-	Instead, for locally changing this color, one may prefer using
-	{\ttfamily\verb|\todo[call chain/.append style=green!50!white]|}%
-	\todo[call chain/.append style=green!50!white]{New broken line color}.
+	On the other hand, for locally changing this color, one may prefer using
+	{\ttfamily\verb|\todo[call chain/.style=green!50!white]|}%
+	\todo[call chain/.style=green!50!white]{New broken line color}.
 
 	The color of the note text is
 	{\ttfamily\verb|snaptodo@block|}.
@@ -85,9 +85,9 @@
 	Using
 	{\ttfamily\verb|\colorlet{snaptodo@block}{blue!50!white}|}
 	lets you change this color.
-	Instead, for locally changing this color, one may prefer using
-	{\ttfamily\verb|\todo[margin block/.append style=blue!50!white]|}%
-	\todo[margin block/.append style=blue!50!white]{New note text color}.
+	On the other hand, for locally changing this color, one may prefer using
+	{\ttfamily\verb|\todo[margin block/.style=blue!50!white]|}%
+	\todo[margin block/.style=blue!50!white]{New note text color}.
 
 \subsection{Lengths}
 
@@ -121,42 +121,37 @@
 	{\ttfamily\verb|\marginparsep|}.
 	These are the built-in dimensions.
 
-\subsection{Alignment and sizes}
+	% raise the notes
 
-	The alignment of the text in the note
-	can be controlled by the choices:
-	{\ttfamily\verb|far|},%
-	\todo[far]{far}
-	which is left on the left and right on the right,
-	{\ttfamily\verb|flush far|},%
-	\todo[flush far]{flush far}
-	which is flush left on the left and flush right on the right,
-	{\ttfamily\verb|near|},%
-	\todo[near]{near}
-	which is right on the left and left on the right,
-	{\ttfamily\verb|flush near|},%
-	\todo[near]{flush near}
-	which is flush right on the left and flush left on the right,
-	{\ttfamily\verb|center|},%
-	\todo[center]{center}
-	which is center on both sides.
-	{\ttfamily\verb|flush center|},%
-	\todo[flush center]{flush center}
-	which is flush center on both sides.
+	% biased classification
+
+\subsection{Alignment}
+
+	The alignment of the text is controlled by:
+	{\ttfamily\verb|margin block/.style={align=???}|}.
+	The default setting is
+	{\ttfamily\verb|align=flush \std@leftright|},
+	which flushes the text toward the page edges.
+	If you do
+	{\ttfamily\verb|align=flush \std@rightleft|},
+	the text will be flushed toward the center.%
+	\makeatletter
+	\todo[margin block/.style={align=flush \std@rightleft}]{flush toward center}
+	\makeatother
 	
+
+\subsection{Font}
+
 	Font size is controlled by
-	\todo[font=\tiny]{tiny}
-	\todo[font=\Large]{Large}
-	\todo[font=\Huge]{Huge}
-	{\ttfamily\verb|/snaptodo/block font|}.
-
-%%% \marginparsep
-
-%%% \marginparwidth
+	\todo[margin block/.style={font=\tiny}]{tiny}
+	\todo[margin block/.style={font=\Large}]{Large}
+	\todo[margin block/.style={font=\Huge}]{Huge}
+	{\ttfamily\verb|margin block/.style={font=...}|}.
+	\todo[margin block/.style={font=\itshape}]{itshape}
+	\todo[margin block/.style={font=\bfseries}]{bfseries}
+	\todo[margin block/.style={font=\sffamily}]{sffamily}
+	So does font family.
 
 %%% customize color
-
-%%% `block font`' or `font`?
-
 
 \end{document}
