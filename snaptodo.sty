@@ -22,6 +22,14 @@
 
 \RequirePackage{tikzpagenodes}
 
+\ifx\todo\snaptodo@undefined
+\else
+	\PackageWarning{snaptodo}{%
+		Control sequence \protect\todo\space was defined.\MessageBreak
+		I am going to override it anyways.
+	}
+\fi
+
 \def\todo{%
 	\snaptodo@initialize
 	\global\let\todo\snaptodo@main
@@ -55,7 +63,7 @@
 
 \def\snaptodo@remember@side{
 	\pgfpointanchor{current page}{center}
-	\ifdim\pgf@x>0pt
+	\ifdim\pgf@x>\std@chainbias
 		\def\std@westeast{west}
 		\def\std@eastwest{east}
 		\def\std@leftright{left}
@@ -89,12 +97,14 @@
 	\ifdim\pgf@y<0pt\else
 		\pgfpointanchor{snaptodo@margin@\std@leftright}{south}
 		\pgftransformshift{\pgfpoint0{min(
+			\std@blockrise
+			,
 			\pgf@y
 			-\ht\pgfnodeparttextbox
 			-\dp\pgfnodeparttextbox
 			-2*\pgfkeysvalueof{/pgf/inner ysep}
 			-\std@blocksep
-		,0)}}
+		)}}
 	\fi
 }
 
@@ -130,6 +140,8 @@
 		\let\snaptodo@key\pgfkeyscurrentname%
 		\pgfkeys{/pgf/\snaptodo@key/.try={#1}}%
 	},
+	block rise/.store in=\std@blockrise,
+	block rise=0pt,
 	block sep/.store in=\std@blocksep,
 	block sep=\baselineskip,
 	margin@block/.style={
@@ -138,6 +150,8 @@
 		align=flush \std@leftright,
 		text=snaptodo@block,
 	},
+	chain bias/.store in=\std@chainbias,
+	chain bias=0pt,
 	chain sep/.store in=\std@chainsep,
 	chain sep=0.5ex,
 	call@chain/.style={
