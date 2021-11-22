@@ -25,3 +25,5 @@ The result should be
 ## Demo
 
 ![A demo of bumping algorithm via Lissajous curve](ct.gif)
+
+Source code in [circle_testing.tex](circle_testing.tex).
