@@ -26,7 +26,7 @@ Try to compile
 The result should be
 [minimal_testing.pdf](minimal_testing.pdf).
 
-## Demo
+## Dynamic Demo
 
 ![A demo of bumping algorithm via Lissajous curve](ct.gif)
 
