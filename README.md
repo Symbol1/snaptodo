@@ -3,16 +3,18 @@
 
 a LaTeX ToDo PaCKaGe.
 
-Please check out the
-[pdf documentation](/snaptodo.pdf).
+## Documentation
 
-# Installation
+Please check out the pdf documentation
+[snaptodo.pdf](snaptodo.pdf).
+
+## Installation
 
 Copy and paste
 [snaptodo.sty](snaptodo.sty)
 to your working directory.
 
-# Minimal Working Example
+## Minimal Working Example
 
 Try to compile
 [minimal_testing.tex](minimal_testing.tex).
