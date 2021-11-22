@@ -1,7 +1,7 @@
 
 # snaptodo
 
-A LaTeX ToDo PacKage.
+a LaTeX ToDo PaCKaGe.
 
 Please check out the
 [pdf documentation](/snaptodo.pdf).
