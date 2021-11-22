@@ -3,6 +3,10 @@
 
 a LaTeX ToDo PaCKaGe.
 
+## Before vs After
+
+![A comparison for with or without todo note](ba.png)
+
 ## Documentation
 
 Please check out the pdf documentation
