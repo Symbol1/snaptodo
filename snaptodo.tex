@@ -4,13 +4,15 @@
 \def\todo{}
 \usepackage{snaptodo}
 
-\usepackage[pdfusetitle]{hyperref}
+\usepackage[pdfusetitle,urlbordercolor=red!50!black]{hyperref}
 
 \begin{document}
 
 \title{Snaptodo---A Snap-to-the-Correct-Side Todo}
 
-\author{Hsin-Po Wang\thanks{A.Simple.People@gmail.com}}
+\author{Hsin-Po Wang\thanks{
+	\href{mailto:A.Simple.People@gmail.com}{\ttfamily A.Simple.People@gmail.com}.
+	\url{https://www.symbol.codes}.}}
 
 \maketitle
 
@@ -56,8 +58,8 @@
 	\todo{Calling point!}
 	is on the left of a page,%
 	\todo{Left of a page!}
-	the todo note, after compiling twice of course,
-	will appear to the left margin.%
+	the todo note---after compiling twice of
+	course---will appear to the left margin.%
 	\todo{On the left margin!}
 	And vice versa.%  
 	\todo{Vice versa!}
@@ -100,7 +102,29 @@
 	{\ttfamily\verb|\todo[margin block/.style=blue!50!white]|}.%
 	\todo[margin block/.style=blue!50!white]{New note text color}
 
-\subsection{Length}
+\subsection{Line style}
+
+	In order to use a thicker or thinner broken line,
+	recall the standard Ti\emph kZ option
+	{\ttfamily\verb|[thick]|},
+	{\ttfamily\verb|[ultra thin]|},
+	or
+	{\ttfamily\verb|[line width=???]|}.
+	In our case, simply put that option in the proper style
+	{\ttfamily\verb|\todo[call chain/.style={line width=???}]{}|}.%
+	\todo[call chain/.style={line width=2pt}]{Thicker broken line}
+
+	In order to use a special dash pattern,
+	recall the standard Ti\emph kZ option
+	{\ttfamily\verb|[dotted]|},
+	{\ttfamily\verb|[dashed]|},
+	or
+	{\ttfamily\verb|[dash pattern=???]|}.
+	In our case, simply put that option in the proper style
+	{\ttfamily\verb|\todo[call chain/.style={dash pattern=???}]{}|}.%
+	\todo[call chain/.style={dashed}]{Dashed broken line}
+
+\subsection{Sep and width}
 
 	The gap between two note blocks is stored in
 	{\ttfamily\verb|/snaptodo/block sep|}.
@@ -140,8 +164,8 @@
 	You can change this by
 	{\ttfamily\verb|/snaptodo/chain bias=-99in|}.%
 	\todo[chain bias=-99in]{Forced to the left}
-	That way, all todo notes are forcedly snapped
-	to the left hand side.  Alternatively, by
+	That way, all todo notes are forcedly
+	snapped to the left hand side.  Or, by
 	\todo[chain bias=99in]{Forced to the right}%
 	{\ttfamily\verb|/snaptodo/call bias=99in|},
 	all todo notes are forcedly snapped to the right hand side.
@@ -165,19 +189,21 @@
 
 \subsection{Alignment}
 
-	The alignment of text is controlled by:
-	{\ttfamily\verb|margin block/.style={align=???}|}.
+	By
+	{\ttfamily\verb|/snaptodo/margin block/.style={align=???}|}
+	one can control the alignment of note text.
 	The default setting is
 	{\ttfamily\verb|align=flush \std@leftright|},
 	which flushes the text toward the page edges.
-	If you do
+	If
 	{\ttfamily\verb|align=flush \std@rightleft|},
-	the text will be flushed toward the text body.%
+	is what you do,%
 	\makeatletter
 	\todo[margin block/.style={align=flush \std@rightleft}]
 	{flush toward text body}
 	\makeatother
-	Don't forget that you need
+	the text will be flushed toward the main
+	text body.  Don't forget that you need
 	{\ttfamily\verb|\makeatletter|}
 	and
 	{\ttfamily\verb|\makeatother|}
@@ -189,12 +215,10 @@
 	\todo[margin block/.style={font=\tiny}]{tiny}
 	\todo[margin block/.style={font=\Large}]{Large}
 	\todo[margin block/.style={font=\Huge}]{Huge}
-	{\ttfamily\verb|margin block/.style={font=...}|}.
+	{\ttfamily\verb|/snpatodo/margin block/.style={font=...}|}.
 	\todo[margin block/.style={font=\itshape}]{itshape}
-	\todo[margin block/.style={font=\bfseries}]{bfseries}
 	\todo[margin block/.style={font=\sffamily}]{sffamily}
+	\todo[margin block/.style={font=\bfseries}]{bfseries}
 	So is font family.
-
-%%% customize color
 
 \end{document}

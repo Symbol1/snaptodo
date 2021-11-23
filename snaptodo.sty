@@ -12,15 +12,18 @@
 %   the note is on the left or right margin,
 %   whichever is closer.
 % * The notes bump each other
-%   so they never overlap.
+%   so they never overlap;
+%   the lines never overlap either
 % * Aesthetic and customizable style.
+%
+% License = https://www.latex-project.org/lppl/lppl-1-3c/
 
 
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\NeedsTeXFormat{LaTeX2e}[2021/06/01]
 
 \ProvidesPackage{snaptodo}[2021/11/22]
 
-\RequirePackage{tikzpagenodes}
+\RequirePackage{tikzpagenodes}[2012/09/16]
 
 \ifx\todo\snaptodo@undefined
 \else
@@ -48,8 +51,9 @@
 }
 
 \def\snaptodo@main{%
-	\pgfutil@ifnextchar[%]
-	{\snaptodo@main@opt}{\snaptodo@main@opt[]}%
+	\pgfutil@ifnextchar[
+	{\snaptodo@main@opt}
+	{\snaptodo@main@opt[]}%]
 }
 
 \def\snaptodo@main@opt[#1]#2{%
