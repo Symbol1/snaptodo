@@ -1,0 +1,21 @@
+
+# snaptodo
+
+Hsin-Po Wang
+mailto:a.simple.people@gmail.com 
+https://www.symbol.codes
+
+This is snaptodo,
+an alternative to todonote 
+that differs in the following ways
+
+* Depending on where you call `\todo`,
+  the note is on the left or right margin,
+  whichever is closer.
+* The notes bump each other
+  so they never overlap;
+  the lines never overlap either
+* Aesthetic and customizable style.
+
+License = https://www.latex-project.org/lppl/lppl-1-3c/
+
