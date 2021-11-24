@@ -16,9 +16,9 @@ promote the general Welfare, and secure the Blessings of Liberty to ourselves
 and our Posterity, do ordain and establish this Constitution for the United
 States of America.
 
-\def\todoexample{%
+\def\snaptodoexample{%
 	\pgfmathtruncatemacro\wc{round(1+rnd*10)}%
-	\todo{%
+	\snaptodo{%
 		\foreach\w in{1,...,\wc}{%
 			\pgfmathsetmacro\l{1+rnd*10}%
 			\rule{\l pt}{1ex}
@@ -26,7 +26,7 @@ States of America.
 	},
 }
 \catcode`\,=\active
-\let,=\todoexample
+\let,=\snaptodoexample
 
 \section{After todo notes}
 

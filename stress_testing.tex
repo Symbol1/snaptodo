@@ -10,7 +10,7 @@
 
 \def\todoexample{%
 	\pgfmathtruncatemacro\wc{round(1+rnd*10)}%
-	\todo{%
+	\snaptodo{%
 		\foreach\w in{1,...,\wc}{%
 			\pgfmathsetmacro\l{1+rnd*10}%
 			\rule{\l pt}{1ex}
