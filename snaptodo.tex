@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{Snaptodo---A Snap-to-the-Correct-Side Todo\thanks{
+\title{Snaptodo---A todo that snaps to the closer side\thanks{
 	Repository
 	\url{https://github.com/Symbol1/snaptodo}.
 }}
@@ -24,15 +24,14 @@
 \maketitle
 
 \begin{abstract}
-	Snaptodo package is an alternative to the todonote package
-	that differs in the following ways:
+	Snaptodo package is an alternative to todonote package,
+	from which it differs in the following ways:
 	(A)	Depending on where you call
 		{\ttfamily\color{red!50!black}\string\snaptodo},
 		the note is put on the left or right margin,
 		whichever is closer.
 	(B)	The notes bump each other down so they never overlap;
 		the lines never overlap either;
-		and they don't trigger the marginpar warning.
 	(C)	Minimalistic, aesthetic, and customizable style.
 
 \end{abstract}
@@ -94,8 +93,8 @@
 	Saying
 	{\ttfamily\verb|\colorlet{snaptodo@chain}{green!50!white}|}
 	lets you to change this color globally.  On the other hand,
-	for locally changing this color, one may prefer using
-	{\ttfamily\verb|\snaptodo[call chain/.style=green!50!white]|}.%
+	for locally changing this color, one may prefer
+	{\ttfamily\verb|\snaptodo[call chain/.style=green!50!white]{}|}.%
 	\snaptodo[call chain/.style=green!50!white]{New broken line color}
 
 	The color of the note text is
@@ -105,8 +104,8 @@
 	Saying
 	{\ttfamily\verb|\colorlet{snaptodo@block}{blue!50!white}|}
 	lets you change this color.  On the other hand,
-	for locally changing this color, one may prefer using
-	{\ttfamily\verb|\snaptodo[margin block/.style=blue!50!white]|}.%
+	for locally changing this color, one may prefer
+	{\ttfamily\verb|\snaptodo[margin block/.style=blue!50!white]{}|}.%
 	\snaptodo[margin block/.style=blue!50!white]{New note text color}
 
 \subsection{Line style}
@@ -118,8 +117,8 @@
 	or
 	{\ttfamily\verb|[line width=???]|}.
 	In our case, simply put that option in this style
-	{\ttfamily\verb|\snaptodo[call chain/.style={line width=???}]{}|}.%
-	\snaptodo[call chain/.style={line width=2pt}]{Thicker broken line}
+	\snaptodo[call chain/.style={line width=2pt}]{Thicker broken line}%
+	{\ttfamily\verb|\snaptodo[call chain/.style={line width=???}]{}|}.
 
 	In order to use a special dash pattern,
 	recall the standard Ti\emph kZ option
@@ -128,8 +127,8 @@
 	or
 	{\ttfamily\verb|[dash pattern=???]|}.
 	In our case, simply put that option in this style
-	{\ttfamily\verb|\snaptodo[call chain/.style={dash pattern=???}]{}|}.%
-	\snaptodo[call chain/.style={dashed}]{Dashed broken line}
+	\snaptodo[call chain/.style={dashed}]{Dashed broken line}%
+	{\ttfamily\verb|\snaptodo[call chain/.style={dash pattern=???}]{}|}.
 
 \subsection{Sep and width}
 
@@ -181,12 +180,12 @@
 
 	If your document is really busy, e.g., like
 	{\ttfamily\verb|stress_testing.tex|},
-	consider setting a positive
-	{\ttfamily\verb|/snaptodo/block rise|}.%
+	try setting a positive
+	{\ttfamily\verb|/snaptodo/block rise|},%
 	\snaptodo[block rise=2em]{Rising}
 	\snaptodo[block rise=2em]{to leave}
 	\snaptodo[block rise=2em]{room.}
-	For instance,
+	e.g.,
 	{\ttfamily\verb|\snaptodo[block rise=2em]{}|}.
 	That way, a note will rise by that amount
 	to leave more rooms for later notes.
