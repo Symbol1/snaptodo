@@ -1,0 +1,39 @@
+
+\documentclass{article}
+
+\usepackage{snaptodo}
+
+\begin{document}
+
+\marginparsep=48pt
+\marginparwidth=72pt
+
+\section{Before todo notes}
+
+We the People of the United States, in Order to form a more perfect Union,
+establish Justice, insure domestic Tranquility, provide for the common defence,
+promote the general Welfare, and secure the Blessings of Liberty to ourselves
+and our Posterity, do ordain and establish this Constitution for the United
+States of America.
+
+\def\todoexample{%
+	\pgfmathtruncatemacro\wc{round(1+rnd*10)}%
+	\todo{%
+		\foreach\w in{1,...,\wc}{%
+			\pgfmathsetmacro\l{1+rnd*10}%
+			\rule{\l pt}{1ex}
+		}%
+	},
+}
+\catcode`\,=\active
+\let,=\todoexample
+
+\section{After todo notes}
+
+We the People of the United States, in Order to form a more perfect Union,
+establish Justice, insure domestic Tranquility, provide for the common defence,
+promote the general Welfare, and secure the Blessings of Liberty to ourselves
+and our Posterity, do ordain and establish this Constitution for the United
+States of America.
+
+\end{document}

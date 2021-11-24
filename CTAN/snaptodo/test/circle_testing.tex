@@ -1,0 +1,41 @@
+
+\documentclass{article}
+
+\usepackage[
+	papersize={4in,3in},
+	text={2in,2in},
+	marginparwidth=40pt,
+	marginparsep=20pt
+]{geometry}
+
+\usepackage{snaptodo}
+
+\begin{document}
+
+\def\nframe{120}
+\foreach\fr in{1,...,\nframe}{
+	
+	\noindent\\[\dimexpr-1em-\baselineskip]
+	\todo{North West}
+	\hfill
+	\todo{North East}
+	
+	\vskip0ptplus1fill
+	\pgfmathsetmacro\x{72*cos(\fr0/\nframe*36*3)}
+	\pgfmathsetmacro\y{72*sin(\fr0/\nframe*36*2)}
+	\vskip\y pt
+	\noindent
+	\hskip1in
+	\hskip\x pt%
+	\todo{Hobbit}
+	\vskip-\y pt
+	\vskip0ptplus1fill
+	
+	\noindent
+	\todo{South West}
+	\hfill
+	\todo{South East}
+	\clearpage
+}
+
+\end{document}
