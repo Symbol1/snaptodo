@@ -1,43 +1,45 @@
 
 % # snaptodo
 %
+% https://github.com/Symbol1/snaptodo
+%
 % Hsin-Po Wang
 % mailto:a.simple.people@gmail.com 
 % https://www.symbol.codes
 %
 % This is snaptodo.sty,
-% an alternative to todonote.sty
-% that differs in the following ways
+% an alternative to todonote.sty,
+% from which it differs in the following ways:
 %
-% * Depending on where you call `\todo`,
+% * Depending on where you call `\snaptodo`,
 %   the note is on the left or right margin,
 %   whichever is closer.
-% * The notes bump each other
-%   so they never overlap;
-%   the lines never overlap either
-% * Aesthetic and customizable style.
+% * The notes bump each other so they never overlap;
+%   the lines never overlap either.
+% * Minimalistic, aesthetic and customizable style.
 %
-% License = https://www.latex-project.org/lppl/lppl-1-3c/
+% License
+% https://www.latex-project.org/lppl/lppl-1-3c/
 
 
 \NeedsTeXFormat{LaTeX2e}[2021/06/01]
 
-\ProvidesPackage{snaptodo}[2021/11/22]
+\ProvidesPackage{snaptodo}[2021/12/01]
 
 \RequirePackage{tikzpagenodes}[2012/09/16]
 
-\ifx\todo\snaptodo@undefined
+\ifx\snaptodo\snaptodo@undefined
 \else
 	\PackageWarning{snaptodo}{%
-		Control sequence \protect\todo\space was defined.\MessageBreak
+		Control sequence \protect\snaptodo\space was defined.\MessageBreak
 		I am going to override it anyways.
 	}
 \fi
 
-\def\todo{%
+\def\snaptodo{%
 	\snaptodo@initialize
-	\global\let\todo\snaptodo@main
-	\todo
+	\global\let\snaptodo\snaptodo@main
+	\snaptodo
 }
 
 \def\snaptodo@initialize{%
